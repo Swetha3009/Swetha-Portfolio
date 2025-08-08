@@ -51,7 +51,7 @@ export default function About() {
         <div className="about-photoWrap">
           <div className="image-glass">
             <img
-              src="/profile.jpeg"
+              src={`${import.meta.env.BASE_URL}profile.jpeg`}
               alt="Swetha Jagadeesan, Software Engineer"
               className="about-image"
               width={220}

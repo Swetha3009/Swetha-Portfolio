@@ -89,14 +89,15 @@ export default function Hero() {
 
         {/* Right: lottie */}
         <div className="hero-art">
-      <img
-  src="/Swetha_ghibli.webp"
-  width={360} height={480} 
-  alt="Swetha"
-  className="hero-photo"
-  loading="eager"
-  decoding="async"
-/>
+  <img
+    src={`${import.meta.env.BASE_URL}Swetha_ghibli.webp`}
+    width={360}
+    height={480}
+    alt="Swetha"
+    className="hero-photo"
+    loading="eager"
+    decoding="async"
+  />
       </div>
 
       </div>
