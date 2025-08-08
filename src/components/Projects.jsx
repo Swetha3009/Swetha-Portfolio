@@ -9,22 +9,32 @@ export default function Projects() {
 
       <div className="project-wrapper">
         {projects.map((project, idx) => (
-          <div className={`project-row ${idx % 2 === 0 ? 'left' : 'right'}`} key={idx}>
+          <div className={`project-row ${idx % 2 ? 'right' : 'left'}`} key={project.title || idx}>
             <div className="project-img-container">
-              <img src={project.image} alt={project.title} className="project-image-showcase" />
+              <img
+                src={project.image}
+                alt={project.title}
+                className="project-image-showcase"
+                loading="lazy"
+              />
             </div>
+
             <div className="project-description-container">
               <p className="featured-label">Featured Project</p>
               <h3 className="project-title-showcase">{project.title}</h3>
               <p className="project-description-showcase">{project.description}</p>
+
               <ul className="project-tech-stack">
-                {project.tech.map((tech, i) => (
-                  <li key={i}>{tech}</li>
-                ))}
+                {project.tech?.map((t) => <li key={t}>{t}</li>)}
               </ul>
+
               <div className="project-links">
-                <a href={project.github} target="_blank" rel="noopener noreferrer" className="glow-button">GitHub</a>
-                {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer" className="glow-button">Live Demo</a>}
+                {project.github && (
+                  <a className="glow-button" href={project.github} target="_blank" rel="noreferrer">GitHub</a>
+                )}
+                {project.demo && (
+                  <a className="glow-button demo" href={project.demo} target="_blank" rel="noreferrer">Live Demo</a>
+                )}
               </div>
             </div>
           </div>
@@ -35,7 +45,7 @@ export default function Projects() {
         <a
           href="https://github.com/Swetha3009?tab=repositories"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noreferrer"
           className="social-btn projects"
         >
           More Projects

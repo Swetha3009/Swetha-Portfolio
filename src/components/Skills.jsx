@@ -20,6 +20,7 @@ const skills = [
     { name: "Redis", icon: "src/assets/Redis.png" },
     { name: "SpringBoot", icon: "src/assets/Spring.png" },
     { name: "VSCode", icon: "src/assets/VSCode.png" }
+
   
   // { name: "Cassendra", icon: "src/assets/Apache-Cassandra.png" },
   

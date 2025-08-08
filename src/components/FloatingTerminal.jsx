@@ -10,11 +10,18 @@ export default function FloatingTerminal() {
       {isOpen && (
         <div className="terminal-overlay">
           <div className="terminal-container">
-            <div className="terminal-header">
+            <div className="floating-term-header">
               <span>Swetha's Dev Console</span>
-              <button className="close-btn" onClick={() => setIsOpen(false)}>×</button>
+              <button
+                className="floating-close-btn"
+                onClick={() => setIsOpen(false)}
+              >
+                ×
+              </button>
             </div>
-            <Terminal />
+
+            {/* Embedded mode: no extra wrapper/header inside Terminal */}
+            <Terminal embedded />
           </div>
         </div>
       )}

@@ -1,140 +1,164 @@
-/* Experience.css */
+.experience-section{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 4.5rem 1.25rem 3rem;
+}
 
-.experience-section {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    scroll-snap-align: start;
-    padding: 0 1.5rem;
-    position: relative;
-  }
-  
-  .experience-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 1000px;
-    width: 100%;
-  }
-  
-  
-  .section-title-alt {
-    font-size: 2rem;
-    color: #8ab4f8;
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-  
-  .section-title-alt span {
-    color: #ffffff;
-    font-weight: 600;
-    margin-left: 0.5rem;
-  }
-  
-  .experience-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  
-  @media (min-width: 768px) {
-    .experience-container {
-      flex-direction: row;
-    }
-  }
-  
-  .experience-tabs {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.experience-wrapper{
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+.section-title-alt{
+  font-size: 2rem;
+  color: #8ab4f8;
+  text-align: center;
+  margin-bottom: 2.25rem;
+}
+.section-title-alt span{ color:#fff; font-weight:600; }
+
+/* layout */
+.experience-container{
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+  align-items: start;
+}
+
+/* tabs (left) */
+.tabs-col{
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+
+.tab-button{
+  position: relative;
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: .75rem;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: .6rem .6rem .6rem .4rem;
+  border-radius: 10px;
+  color: #cfe1ff;
+  cursor: pointer;
+  transition: background .18s ease, box-shadow .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.tab-button:hover{
+  background: rgba(138,180,248,.06);
+  box-shadow: 0 0 0 6px rgba(138,180,248,.07);
+}
+
+.tab-button:focus-visible{
+  outline: none;
+  border-color: #8ab4f8;
+  box-shadow: 0 0 0 6px rgba(138,180,248,.12);
+}
+
+.tab-deco{
+  position: absolute;
+  left: 0;
+  top: 10%;
+  bottom: 10%;
+  width: 3px;
+  border-radius: 2px;
+  background: transparent;
+  transition: background .2s ease, box-shadow .2s ease;
+}
+
+.tab-button.active .tab-deco{
+  background: linear-gradient(180deg,#8ab4f8,transparent);
+  box-shadow: 0 0 10px rgba(138,180,248,.35);
+}
+
+.tab-icon{
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: #141414;
+  border: 1px solid rgba(138,180,248,.25);
+  box-shadow: 0 0 0 4px rgba(138,180,248,.07);
+  font-size: 1.05rem;
+}
+
+.tab-texts{ display:flex; flex-direction:column; line-height:1.1; }
+.tab-company{ color:#fff; font-weight:700; }
+.tab-duration{ color:#aeb6c2; font-size:.85rem; margin-top:.15rem; }
+
+/* panel (right) */
+.exp-card{
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(138,180,248,.18);
+  border-radius: 16px;
+  box-shadow: 0 0 16px rgba(138,180,248,.12);
+  padding: clamp(1rem, 2.2vw, 1.5rem);
+}
+
+.exp-role{ color:#fff; font-size:1.45rem; margin: 0 0 .45rem; }
+.exp-role .at{ color:#8ab4f8; font-weight:600; }
+.exp-dates{ color:#a9a9a9; font-size:.95rem; margin: 0 0 .85rem; }
+
+.tech-pills{
+  list-style:none; padding:0; margin:0 0 .9rem;
+  display:flex; flex-wrap:wrap; gap:.5rem;
+}
+.tech-pills li{
+  background:#181a1f;
+  border:1px solid #2a2f38;
+  color:#94b9ff;
+  font-size:.85rem;
+  padding:.35rem .7rem;
+  border-radius: 999px;
+}
+
+.exp-list{ list-style:none; padding-left: 0; margin:0; }
+.exp-list li{
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: .5rem;
+  color:#d6d6d6;
+  margin-bottom:.6rem;
+  line-height:1.55;
+}
+.exp-list .chev{ color:#8ab4f8; margin-top:.1rem; }
+
+/* reveal */
+[data-reveal]{ opacity:0; transform:translateY(16px); }
+[data-reveal].reveal-in{ opacity:1; transform:none; transition:opacity .5s, transform .5s; }
+[data-reveal="right"]{ transform:translateX(16px); }
+[data-reveal="right"].reveal-in{ transform:none; }
+
+@media (max-width: 900px){
+  .experience-container{
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
-  @media (min-width: 768px) {
-    .experience-tabs {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+
+  .tabs-col{
+    flex-direction: row;
+    gap: .5rem;
+    overflow-x: auto;
+    padding-bottom: .25rem;
+    -webkit-overflow-scrolling: touch;
   }
-  
-  .tab-button {
-    background: transparent;
-    border: none;
-    color: #8ab4f8;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.3s ease;
+
+  .tab-button{
+    min-width: 240px;
+    border: 1px solid rgba(138,180,248,.12);
+    background: rgba(255,255,255,.04);
   }
-  
-  .tab-button:hover,
-  .tab-button.active {
-    background-color: rgba(138, 180, 248, 0.1);
-    border-left: 2px solid #8ab4f8;
-    color: #ffffff;
-  }
-  
-  .experience-content {
-    flex: 1;
-    padding-left: 1rem;
-  }
-  
-  .experience-content h3 {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-    color: #ffffff;
-  }
-  
-  .experience-content .highlight {
-    color: #8ab4f8;
-    font-weight: 500;
-  }
-  
-  .duration {
-    font-size: 0.9rem;
-    color: #aaa;
-    margin-bottom: 1rem;
-  }
-  
-  .tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 1rem;
-  }
-  
-  .tech-stack li {
-    background-color: #1a1a1a;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    color: #8ab4f8;
-  }
-  
-  .responsibilities {
-    list-style: none;
-    padding-left: 1rem;
-    color: #ccc;
-  }
-  
-  .responsibilities li {
-    position: relative;
-    margin-bottom: 0.75rem;
-    padding-left: 1.2rem;
-  }
-  
-  .responsibilities li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: #8ab4f8;
-  }
-  
+
+  .tab-deco{ display: none; }
+}
+
+@media (max-width:900px){
+  .exp-panel{scroll-snap-type:y mandatory}
+  .exp-panel > *{scroll-snap-align:start}
+}
+

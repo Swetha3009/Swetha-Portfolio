@@ -100,7 +100,7 @@ export default function About() {
 
           {/* secondary CTA */}
           <div className="about-ctas">
-            <a href="/Swetha_Resume.pdf" className="btn btn-primary" target="_blank" rel="noreferrer">
+            <a href="/Swetha_Jagadeesan_Resume.pdf" className="btn btn-primary" target="_blank" rel="noreferrer">
               <FaDownload aria-hidden /> Resume
             </a>
             <a href="mailto:sj4378@nyu.edu" className="btn btn-ghost">
