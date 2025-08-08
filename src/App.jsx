@@ -7,6 +7,7 @@ import ChatPopup from './components/Chatpopup';
 import Experience from './components/Experience';
 import Skills from './components/Skills';
 import FloatingTerminal from "./components/FloatingTerminal";
+import Contact from "./components/ContactFooter";
 
 function App() {
   return (
@@ -17,8 +18,10 @@ function App() {
       <Experience />
       <Projects />
       <Skills />
+      <Contact />
       <FloatingTerminal />
       <ChatPopup />
+      
       
     </>
   )
