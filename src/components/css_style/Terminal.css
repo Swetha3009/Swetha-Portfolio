@@ -1,0 +1,35 @@
+:root {
+    --accent-color: #9f7aea; /* default purple */
+  }
+  
+  .terminal {
+    background-color: #000;
+    color: var(--accent-color);
+    font-family: "Fira Code", monospace;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 700px;
+    margin: 50px auto;
+    min-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 0 15px rgba(159, 122, 234, 0.7);
+  }
+  
+  .terminal-line {
+    margin-bottom: 5px;
+    white-space: pre-wrap;
+  }
+  
+  .prompt {
+    color: #00ff99;
+  }
+  
+  .terminal-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+  
