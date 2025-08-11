@@ -1,14 +1,12 @@
 import React from "react";
-import Lottie from "lottie-react";
 import { ReactTyped } from "react-typed";
 import { FaGithub, FaLinkedin, FaDownload } from "react-icons/fa";
-import computerData from "../assets/lottie/computer_open_lottie.json";
 import "./css_style/Hero.css";
+import TerminalCTA from "../components/TerminalCTA";
 
 export default function Hero() {
   return (
     <header id="hero" className="hero">
-      {/* animated background layers */}
       <div aria-hidden className="hero-bg">
         <div className="hero-glow hero-glow--tl" />
         <div className="hero-glow hero-glow--br" />
@@ -24,12 +22,7 @@ export default function Hero() {
 
           <h2 className="hero-subtitle" aria-live="polite">
             <ReactTyped
-              strings={[
-                "Software Engineer",
-                "Cloud Developer",
-                "Backend Developer",
-                "ML Enthusiast",
-              ]}
+              strings={["Software Engineer","Backend and Cloud Developer","ML Enthusiast"]}
               typeSpeed={60}
               backSpeed={40}
               backDelay={1400}
@@ -45,61 +38,46 @@ export default function Hero() {
           <div className="hero-ctas">
             <a
               className="btn btn-primary"
-              href="/Swetha_Jagadeesan_Resume.pdf"
+              href={`${import.meta.env.BASE_URL}Swetha_Jagadeesan_Resume.pdf`}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaDownload aria-hidden /> <span>Resume</span>
             </a>
 
-            <a
-              className="btn btn-ghost"
-              href="https://www.linkedin.com/in/swetha-jagadeesan-972b821b4/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-            >
+            <a className="btn btn-ghost" href="https://www.linkedin.com/in/swetha-jagadeesan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <FaLinkedin />
             </a>
 
-            <a
-              className="btn btn-ghost"
-              href="https://github.com/Swetha3009"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-            >
+            <a className="btn btn-ghost" href="https://github.com/Swetha3009" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <FaGithub />
             </a>
+
+            {/* Terminal CTA in the same row */}
+            <TerminalCTA />
+
           </div>
 
           <a href="#about" className="scroll-cue" aria-label="Scroll to About">
             <span>Scroll</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M6 9l6 6 6-6"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
-        </div>
+        </div> {/* ← close hero-copy here */}
 
-        {/* Right: lottie */}
+        {/* Right: image column (sibling of hero-copy) */}
         <div className="hero-art">
-  <img
-    src={`${import.meta.env.BASE_URL}Swetha_ghibli.webp`}
-    width={360}
-    height={480}
-    alt="Swetha"
-    className="hero-photo"
-    loading="eager"
-    decoding="async"
-  />
-      </div>
-
+          <img
+            src={`${import.meta.env.BASE_URL}Swetha_ghibli.webp`}
+            width={360}
+            height={480}
+            alt="Swetha"
+            className="hero-photo"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
       </div>
     </header>
   );

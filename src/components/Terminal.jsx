@@ -18,12 +18,10 @@ Welcome to Swetha's Portfolio Terminal!
 const INITIAL_HISTORY = [BANNER, "Type 'help' to see commands."];
 
 export default function Terminal({ embedded = false }) {
-  // restore theme on mount  ⬇️
+  // restore theme on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem("term_theme");
-    if (savedTheme) {
-      document.documentElement.style.setProperty("--accent-color", savedTheme);
-    }
+    if (savedTheme) document.documentElement.style.setProperty("--accent-color", savedTheme);
   }, []);
 
   const [history, setHistory] = useState(() => {
@@ -32,6 +30,11 @@ export default function Terminal({ embedded = false }) {
   });
   const [input, setInput] = useState("");
   const [histIndex, setHistIndex] = useState(null);
+
+  // NEW: simple “current working dir” + current project
+  const [cwd, setCwd] = useState("/");
+  const [currentProject, setCurrentProject] = useState(null);
+
   const boxRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -50,7 +53,7 @@ export default function Terminal({ embedded = false }) {
     const val = THEMES[name];
     if (!val) return `Theme '${name}' not found.`;
     document.documentElement.style.setProperty("--accent-color", val);
-    localStorage.setItem("term_theme", val); // ⬅️ persist
+    localStorage.setItem("term_theme", val);
     return `Theme set to ${name}.`;
   };
 
@@ -66,8 +69,32 @@ export default function Terminal({ embedded = false }) {
       .map((p, i) => `${String(i + 1).padStart(2, "0")}. ${p.title} — ${p.github || p.link || "no link"}`)
       .join("\n");
 
+  const projectDetails = (idx) => {
+    const p = projects[idx];
+    if (!p) return "Project not found.";
+    const tech = Array.isArray(p.tech) ? p.tech.join(", ") : (p.tech || "");
+    return [
+      `# ${p.title}`,
+      p.description ? p.description : "",
+      tech ? `Tech: ${tech}` : "",
+      p.github ? `GitHub: ${p.github}` : p.link ? `Link: ${p.link}` : "No link",
+      "",
+      "Try: open   | back   | ls projects",
+    ].filter(Boolean).join("\n");
+  };
+
   const openProject = (arg) => {
+    // if no arg, try current project
+    if (!arg && currentProject != null) {
+      const p = projects[currentProject];
+      const href = p.github || p.link;
+      if (!href) return "This project has no link.";
+      window.open(href, "_blank");
+      return `Opening ${p.title}...`;
+    }
+
     if (!arg) return "Usage: open <number|name>";
+
     let p = null;
     if (/^\d+$/.test(arg)) {
       p = projects[Number(arg) - 1];
@@ -95,44 +122,83 @@ export default function Terminal({ embedded = false }) {
     return matches.map((p) => `• ${p.title} — ${p.github || p.link || "no link"}`).join("\n");
   };
 
+  // ---- HELP / COMMANDS ----
   const HELP = {
     help: "help — list commands",
+    man: "man <cmd> — command details",
     about: "about — brief intro",
-    projects: "projects — list projects",
-    open: "open <n|name> — open a project link",
+    ls: "ls projects — list projects",
+    cd: "cd <number> — enter a project; cd .. — go back",
+    open: "open [n|name] — open project link (defaults to current project)",
+    info: "info — details about the current project",
     find: "find <term> — search projects",
-    skills: "skills — scroll to skills",
-    contact: "contact — email & LinkedIn",
+    linkedin: "linkedin — open LinkedIn profile",
+    github: "github — open GitHub profile",
     resume: "resume — open resume PDF",
+    skills: "skills — scroll to skills",
     goto: "goto <section> — about|experience|projects|skills|contact",
     theme: "theme <purple|teal|rose|amber|random>",
-    social: "social <github|linkedin>",
+    contact: "contact — email & LinkedIn",
     clear: "clear — clear output (keeps banner)",
     banner: "banner — print ASCII banner",
     date: "date — current time",
     whoami: "whoami — a fun easter egg",
-    man: "man <cmd> — command details",
   };
+  
   const man = (cmd) => HELP[cmd] || `No manual entry for '${cmd}'.`;
 
   const commands = {
     help: () => Object.values(HELP).join("\n"),
     man: ([c]) => man(c),
-    about: () => "I'm Swetha Jagadeesan — Software Engineer (Cloud & Backend).",
-    skills: () => scrollToSection("skills"),
-    projects: () => listProjects(),
+    about: () => "I'm Swetha Jagadeesan — Software Engineer (Cloud & Backend). I love to code, eat good food, and travel!",
+
+    // NEW: ls subcommand
+    ls: ([what]) => {
+      if (!what || what === "projects") return listProjects();
+      return `Unknown target for ls: ${what}`;
+    },
+
+    // NEW: cd to project number, cd .. to back
+    cd: ([target]) => {
+      if (!target) return "Usage: cd <number>|..";
+      if (target === "..") {
+        setCurrentProject(null);
+        setCwd("/");
+        return "Back to /";
+      }
+      if (/^\d+$/.test(target)) {
+        const idx = Number(target) - 1;
+        if (!projects[idx]) return "Project not found.";
+        setCurrentProject(idx);
+        setCwd(`/projects/${target}`);
+        return projectDetails(idx);
+      }
+      return "Usage: cd <number>|..";
+    },
+
+    // convenience
+    back: () => commands.cd([".."]),
+    info: () => (currentProject != null ? projectDetails(currentProject) : "Not inside a project."),
+
+    projects: () => listProjects(), // keep old alias if you want
     open: ([arg]) => openProject(arg),
     find: ([term]) => findProjects(term),
+    skills: () => scrollToSection("skills"),
     contact: () => "Email: sj4378@nyu.edu | LinkedIn: linkedin.com/in/swetha-jagadeesan",
-    resume: () => { window.open("/Swetha_Jagadeesan_Resume.pdf", "_blank"); return "Opening resume..."; },
+
+    // use Vite BASE_URL so GH Pages path works
+    resume: () => { window.open(`${import.meta.env.BASE_URL}Swetha_Jagadeesan_Resume.pdf`, "_blank"); return "Opening resume..."; },
+
     clear: () => { setHistory(INITIAL_HISTORY); return ""; },
     goto: ([id]) => scrollToSection(id),
     theme: ([name]) => setTheme(name),
-    social: ([site]) => {
-      const links = { github: "https://github.com/Swetha3009", linkedin: "https://www.linkedin.com/in/swetha-jagadeesan/" };
-      if (!links[site]) return "Social link not found.";
-      window.open(links[site], "_blank");
-      return `Opening ${site}...`;
+    linkedin: () => {
+      window.open("https://www.linkedin.com/in/swetha-jagadeesan/", "_blank");
+      return "Opening LinkedIn…";
+    },
+    github: () => {
+      window.open("https://github.com/Swetha3009", "_blank");
+      return "Opening GitHub…";
     },
     banner: () => BANNER,
     date: () => new Date().toLocaleString(),
@@ -151,9 +217,10 @@ export default function Terminal({ embedded = false }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const text = input;
+    const text = input.trim();
+    if (!text) return;
     const output = run(text);
-    if (output !== "") setHistory((h) => [...h, `$ ${text}`, output]);
+    if (output !== "") setHistory((h) => [...h, `${cwd}$ ${text}`, output]);
     setInput("");
     setHistIndex(null);
   };
@@ -161,32 +228,38 @@ export default function Terminal({ embedded = false }) {
   const onKeyDown = (e) => {
     if (e.key === "ArrowUp") {
       e.preventDefault();
-      const cmds = history.filter((l) => l.startsWith("$ "));
+      const cmds = history.filter((l) => l.includes("$ "));
       if (!cmds.length) return;
       const idx = histIndex === null ? cmds.length - 1 : Math.max(histIndex - 1, 0);
       setHistIndex(idx);
-      setInput(cmds[idx].slice(2));
+      setInput(cmds[idx].split("$ ").pop() || "");
     }
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      const cmds = history.filter((l) => l.startsWith("$ "));
+      const cmds = history.filter((l) => l.includes("$ "));
       if (!cmds.length || histIndex === null) return;
       const idx = Math.min(histIndex + 1, cmds.length - 1);
       setHistIndex(idx);
-      setInput(cmds[idx].slice(2));
+      setInput(cmds[idx].split("$ ").pop() || "");
     }
     if (e.key === "Tab") {
       e.preventDefault();
       const [first, ...rest] = input.trim().split(/\s+/);
       if (!first) return;
+
+      const numbers = Array.from({ length: projects.length }, (_, i) => String(i + 1));
       const pool =
         first.toLowerCase() === "goto" ? SECTIONS
-        : first.toLowerCase() === "open" ? projectNames
+        : first.toLowerCase() === "open" ? [...projectNames, ...numbers]
         : first.toLowerCase() === "theme" ? [...Object.keys(THEMES), "random"]
+        : first.toLowerCase() === "ls" ? ["projects"]
+        : first.toLowerCase() === "cd" ? ["..", ...numbers]
         : Object.keys(commands);
+
       const token = rest.length ? rest[rest.length - 1] : first;
       const matches = pool.filter((x) => x.toLowerCase().startsWith(token.toLowerCase()));
       if (!matches.length) return;
+
       if (rest.length) {
         rest[rest.length - 1] = matches[0];
         setInput(`${first} ${rest.join(" ")}`);
@@ -212,7 +285,7 @@ export default function Terminal({ embedded = false }) {
         <div key={i} className="terminal-line">{line}</div>
       ))}
       <form onSubmit={onSubmit}>
-        <span className="prompt">$ </span>
+        <span className="prompt">{cwd}$ </span>
         <input
           ref={inputRef}
           className="terminal-input"

@@ -1,0 +1,38 @@
+.btn-terminal{
+    position:relative;
+    display:inline-flex; align-items:center; gap:.55rem;
+    padding:.6rem .9rem; border-radius:999px;
+    border:1.5px solid rgba(145,202,255,.5);
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    color:#e6f0ff; text-decoration:none; font-weight:700;
+    box-shadow: 0 0 16px rgba(138,180,248,.15);
+  }
+  .btn-terminal:hover{ box-shadow:0 0 0 6px color-mix(in oklab, #8ab4f8 22%, transparent); transform: translateY(-1px); }
+  .term-icon{ display:inline-flex; opacity:.9; }
+  .term-text{ display:inline-flex; align-items:baseline; gap:.5rem; }
+  .term-sample{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+    font-size:.85em; opacity:.85; background: rgba(255,255,255,.06); padding:.15rem .35rem; border-radius:6px; }
+  .prompt{ color:#8ab4f8; margin-right:.2ch; }
+  .caret{ display:inline-block; width:.55ch; height:1em; translate:0 .2em;
+    background:#e6f0ff; margin-left:.1ch; animation: blink 1s step-end infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+  
+  .badge-new{
+    position:absolute; top:-8px; right:-8px;
+    font-size:.6rem; font-weight:800; padding:.18rem .4rem; border-radius:999px;
+    background: linear-gradient(90deg, #b69cff, #8ab4f8);
+    color:#0f0f0f; box-shadow:0 0 12px rgba(138,180,248,.35);
+  }
+  
+  .kbd{
+    margin-left:.4rem; font-size:.8rem; font-weight:700;
+    padding:.1rem .35rem; border-radius:6px; border:1px solid rgba(255,255,255,.25);
+    background: rgba(255,255,255,.06); color:#cfe1ff;
+  }
+  
+  /* mobile tweaks */
+  @media (max-width: 960px){
+    .term-sample{ display:none; }      /* keep pill clean on small screens */
+    .kbd{ display:none; }
+  }
+  

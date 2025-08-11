@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+#hero, #about, #experience, #projects, #skills, #contact {
+  scroll-margin-top: 80px; /* ~ navbar height */
+}
+
+/* nice-to-have */
+html { scroll-behavior: smooth; }
+
 html, body {
   font-family: 'Inter', sans-serif;
 }
