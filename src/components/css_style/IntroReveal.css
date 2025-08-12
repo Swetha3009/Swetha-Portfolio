@@ -97,6 +97,7 @@ html.intro-active { overflow: hidden; }
     animation: intro-fade var(--fadeMs, 400ms) ease
                forwards calc(var(--wipeMs, 820ms) + var(--postHoldMs, 0ms));
   }
+  .intro.is-wiping { pointer-events: none; }
 
 /* keyframes */
 @keyframes intro-type { to { width: calc(var(--chars) * 1ch); } }

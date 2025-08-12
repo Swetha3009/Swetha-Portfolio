@@ -53,9 +53,7 @@ export default function Hero() {
               <FaGithub />
             </a>
 
-            {/* Terminal CTA in the same row */}
             <TerminalCTA />
-
           </div>
 
           <a href="#about" className="scroll-cue" aria-label="Scroll to About">
@@ -64,19 +62,23 @@ export default function Hero() {
               <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
-        </div> {/* ← close hero-copy here */}
+        </div>
 
-        {/* Right: image column (sibling of hero-copy) */}
+        {/* Right: image column */}
         <div className="hero-art">
-          <img
-            src={`${import.meta.env.BASE_URL}Swetha_ghibli.webp`}
-            width={360}
-            height={480}
-            alt="Swetha"
-            className="hero-photo"
-            loading="eager"
-            decoding="async"
-          />
+          <div className="hero-frame">
+            <img
+              src={`${import.meta.env.BASE_URL}Swetha_ghibli.webp`}
+              width={360}
+              height={480}
+              alt="Swetha"
+              className="hero-photo"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+              sizes="(max-width: 960px) 260px, 360px"
+            />
+          </div>
         </div>
       </div>
     </header>

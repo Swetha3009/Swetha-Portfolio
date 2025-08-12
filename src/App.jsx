@@ -17,12 +17,12 @@ function App() {
   command="pnpm dev"
   runOncePerSession={false}  // switch to true later
   startImmediately={true}    // <<< important
-  typeSpeedMs={100}
-  pauseAfterType={900}
-  preHoldMs={1200}
-  wipeMs={2200}
-  postHoldMs={900}
-  fadeMs={900}
+  typeSpeedMs={200}
+  pauseAfterType={500}
+  preHoldMs={100}
+  wipeMs={1000}
+  postHoldMs={700}
+  fadeMs={400}
 />
 
 
