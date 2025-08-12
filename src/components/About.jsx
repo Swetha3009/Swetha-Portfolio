@@ -63,7 +63,7 @@ export default function About() {
 
           {/* quick facts under photo */}
           <ul className="about-facts">
-            <li><FaMapMarkerAlt aria-hidden /> New York, USA</li>
+            <li><FaMapMarkerAlt aria-hidden="true" /> New York, USA</li>
             <li>Developer</li>
           </ul>
         </div>
@@ -92,15 +92,24 @@ export default function About() {
           </div>
 
           {/* stats row */}
-          <div className="about-stats" aria-label="Quick stats">
-            <div className="stat"><span className="num">8+</span><span>Projects</span></div>
-            <div className="stat"><span className="num">5+</span><span>Years coding</span></div>
-            <div className="stat"><span className="num">4+</span><span>Prod deployments</span></div>
-          </div>
+          <dl className="about-stats" aria-label="Quick stats">
+  <div className="stat">
+    <dt className="num">8+</dt>
+    <dd>Projects</dd>
+  </div>
+  <div className="stat">
+    <dt className="num">5+</dt>
+    <dd>Years coding</dd>
+  </div>
+  <div className="stat">
+    <dt className="num">4+</dt>
+    <dd>Prod deployments</dd>
+  </div>
+</dl>
 
           {/* secondary CTA */}
           <div className="about-ctas">
-            <a href="/Swetha_Jagadeesan_Resume.pdf" className="btn btn-primary" target="_blank" rel="noreferrer">
+            <a href={`${import.meta.env.BASE_URL}Swetha_Jagadeesan_Resume.pdf`} className="btn btn-primary" target="_blank" rel="noreferrer">
               <FaDownload aria-hidden /> Resume
             </a>
             <a href="mailto:sj4378@nyu.edu" className="btn btn-ghost">

@@ -1,0 +1,15 @@
+/* css_style/HoverCursor.css */
+.hover-cursor{
+  position: fixed; left: 0; top: 0;
+  width: 22px; height: 22px;
+  border: 2px solid var(--accent-color, #8ab4f8);
+  border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  opacity: 0; transition: opacity .12s, transform .08s, box-shadow .12s;
+  box-shadow: 0 0 12px rgba(138,180,248,.28);
+}
+.hover-cursor.hc--on { opacity: 1; }
+.hover-cursor.hc--down { transform: translate(-50%,-50%) scale(.9); box-shadow: 0 0 4px rgba(138,180,248,.2); }
+
+@media (prefers-reduced-motion: reduce) { .hover-cursor { transition: none; } }

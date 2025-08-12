@@ -1,20 +1,25 @@
 .experience-section{
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 4.5rem 1.25rem 3rem;
+  --nav-h: 72px;                     /* your navbar height (tweak if needed) */
+  min-height: calc(100dvh - var(--nav-h));
+  padding: var(--nav-h) 1.25rem 2rem; /* top padding clears the navbar */
+  display: grid;
+  place-items: center;               /* centers the wrapper horizontally + vertically */
 }
 
+#experience { scroll-margin-top: var(--nav-h); }
 .experience-wrapper{
   width: min(1100px, 92vw);
-  margin: 0 auto;
+  margin-inline: auto;
+  display: grid;
+  align-content: center;             /* vertical centering when there's extra space */
+  gap: 1.25rem;
 }
 
 .section-title-alt{
   font-size: 2rem;
   color: #8ab4f8;
   text-align: center;
-  margin-bottom: 2.25rem;
+  margin-bottom: 1.25rem;       
 }
 .section-title-alt span{ color:#fff; font-weight:600; }
 
@@ -162,3 +167,7 @@
   .exp-panel > *{scroll-snap-align:start}
 }
 
+
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{ opacity:1 !important; transform:none !important; transition:none !important; }
+}

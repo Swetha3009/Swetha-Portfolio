@@ -184,7 +184,7 @@ export default function Terminal({ embedded = false }) {
     open: ([arg]) => openProject(arg),
     find: ([term]) => findProjects(term),
     skills: () => scrollToSection("skills"),
-    contact: () => "Email: sj4378@nyu.edu | LinkedIn: linkedin.com/in/swetha-jagadeesan",
+    contact: () => "Email: swetha.jagadeesan@nyu.edu | LinkedIn: linkedin.com/in/swetha-jagadeesan",
 
     // use Vite BASE_URL so GH Pages path works
     resume: () => { window.open(`${import.meta.env.BASE_URL}Swetha_Jagadeesan_Resume.pdf`, "_blank"); return "Opening resume..."; },

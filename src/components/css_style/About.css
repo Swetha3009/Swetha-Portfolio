@@ -3,7 +3,7 @@ html, body {
     font-family: 'Inter', sans-serif;
   }
 .about-section {
-    min-height: 100svh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -170,3 +170,6 @@ html, body {
     .timeline-item, .timeline-item .icon, .mini-skills span, .stat { transition:none; }
   }
   
+  .btn:focus-visible, .about-ctas a:focus-visible { outline: 2px solid #8ab4f8; outline-offset: 2px; }
+
+  .btn { min-height: 44px; }

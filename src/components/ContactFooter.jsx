@@ -3,20 +3,25 @@ import { Mail, Github, Linkedin, Copy } from "lucide-react";
 import "./css_style/ContactFooter.css";
 
 export default function ContactFooter() {
-  const email = "sj4378@nyu.edu";
+  const email = "swetha.jagadeesan@nyu.edu";
   const [copied, setCopied] = useState(false);
 
   // Add a little entrance animation trigger if you use IntersectionObserver elsewhere
   useEffect(() => {
     const el = document.querySelector(".contact-card");
     if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && el.classList.add("reveal-in")),
-      { threshold: 0.15 }
-    );
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          el.classList.add("reveal-in");
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
+  
 
   const copyEmail = async () => {
     try {
@@ -51,14 +56,14 @@ export default function ContactFooter() {
           <div className="contact-actions">
             <a
               className="btn primary"
-              href="mailto:sj4378@nyu.edu?subject=Hello%20Swetha&body=Hi%20Swetha,"
+              href={`mailto:${email}?subject=Hello%20Swetha&body=Hi%20Swetha,`}
             >
               <Mail size={18} /> Email me
             </a>
 
             <a
               className="btn outline"
-              href="/Swetha_Jagadeesan_Resume.pdf"
+              href={`${import.meta.env.BASE_URL}Swetha_Jagadeesan_Resume.pdf`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -98,14 +103,12 @@ export default function ContactFooter() {
               <Linkedin size={20} />
               <span>LinkedIn</span>
             </a>
-
-            <a href={`mailto:${email}`} className="social-link email" title="Email">
-              <Mail size={20} />
-              <span>{email}</span>
-            </a>
           </nav>
         </div>
       </div>
+      <span className="sr-only" role="status" aria-live="polite">
+        {copied ? "Email copied to clipboard." : ""}
+        </span>
 
       <div className="footer-bar" role="contentinfo">
         <div className="bar-inner">

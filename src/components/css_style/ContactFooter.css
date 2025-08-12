@@ -145,3 +145,12 @@
   .contact-actions{ gap:.5rem; }
   .social-link span{ display:none; }
 }
+
+.btn:focus-visible, .social-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.btn, .social-link { min-height: 44px; }
+.social-link.email span { word-break: break-all; }
+
+.contact-footer { padding-bottom: 80px; }
