@@ -8,10 +8,24 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import FloatingTerminal from "./components/FloatingTerminal";
 import Contact from "./components/ContactFooter";
+import IntroReveal from "./components/IntroReveal";
 
 function App() {
   return (
     <>
+      <IntroReveal
+  command="pnpm dev"
+  runOncePerSession={false}  // switch to true later
+  startImmediately={true}    // <<< important
+  typeSpeedMs={100}
+  pauseAfterType={900}
+  preHoldMs={1200}
+  wipeMs={2200}
+  postHoldMs={900}
+  fadeMs={900}
+/>
+
+
       <Navbar />
       <Hero />
       <About />

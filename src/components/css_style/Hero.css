@@ -153,15 +153,15 @@ body {
       text-align: left; 
       gap: 1.25rem; 
     }
-    .hero-art { 
-      order: -1;           /* image first on mobile */
+    .hero-art {
+      order: -1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
       min-height: 240px;
       margin-bottom: .5rem;
     }
-    .hero-photo { 
-      max-width: 240px; 
-      border-radius: 14px; 
-    }
+  
     .hero-title { font-size: clamp(1.75rem, 7.5vw, 2.25rem); }
     .hero-description { font-size: .98rem; }
     .btn { padding: .55rem .9rem; }
@@ -181,3 +181,34 @@ body {
     padding: 4px; border-radius: 16px;
     box-shadow: 0 0 22px rgba(138,180,248,.18);
   }
+
+  @media (max-width: 960px) {
+    .hero-inner { 
+      grid-template-columns: 1fr; 
+      text-align: left; 
+      gap: 1.25rem; 
+    }
+  
+    .hero-art {
+      order: -1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 240px;
+      margin-bottom: .5rem;
+    }
+  
+    /* ✅ correct selector + overrides to prevent cropping */
+    .hero-photo {
+      max-width: 260px;
+      max-height: 55vh;
+      height: auto;
+      object-fit: contain;        /* show the whole image */
+      object-position: top center;
+    }
+  
+    .hero-title { font-size: clamp(1.75rem, 7.5vw, 2.25rem); }
+    .hero-description { font-size: .98rem; }
+    .btn { padding: .55rem .9rem; }
+  }
+  

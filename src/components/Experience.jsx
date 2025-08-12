@@ -7,7 +7,7 @@ const experienceData = [
     company: "LOCOMeX Inc.",
     icon: "🚀",
     role: "Software Engineer",
-    duration: "Jan 2024 – May 2025",
+    duration: "Jan 2025 – Present",
     tech: ["Python", "Django", "AWS EKS", "Selenium", "PostgreSQL", "S3"],
     details: [
       "Designed and shipped Django REST APIs for asset intake, filtered search, and risk scoring; modeled data in PostgreSQL and enforced request validation.",
