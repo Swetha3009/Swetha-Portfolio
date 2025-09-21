@@ -202,7 +202,7 @@ export default function Terminal({ embedded = false }) {
     },
     banner: () => BANNER,
     date: () => new Date().toLocaleString(),
-    whoami: () => "swetha@portfolio:~$ Developer -- likes travel, food and dance",
+    whoami: () => "swetha@portfolio:~$ A developer who loves travelling and trying new food😋",
   };
 
   const run = (raw) => {

@@ -81,8 +81,7 @@ export default function About() {
             ML workloads using <strong>Docker</strong> & <strong>Kubernetes on AWS</strong>.
           </p>
           <p>
-            Outside code, I mentor juniors, speak at tech meetups, and sprint on
-            the track 🏃‍♀️.
+            Outside of coding, I enjoy mentoring juniors, dancing, and sprinting on the track 🏃‍♀️.
           </p>
 
           {/* mini skills strip */}

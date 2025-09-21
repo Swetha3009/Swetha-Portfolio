@@ -171,3 +171,9 @@
 @media (prefers-reduced-motion: reduce){
   [data-reveal]{ opacity:1 !important; transform:none !important; transition:none !important; }
 }
+
+.scroll-down {
+  display: block;
+  margin: 1.5rem auto 0;  /* auto left/right centers it */
+  text-align: center;
+}
