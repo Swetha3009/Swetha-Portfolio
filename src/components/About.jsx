@@ -101,8 +101,8 @@ export default function About() {
     <dd>Years coding</dd>
   </div>
   <div className="stat">
-    <dt className="num">4+</dt>
-    <dd>Prod deployments</dd>
+    <dt className="num">2+ </dt>
+    <dd>Years of Experience</dd>
   </div>
 </dl>
 
