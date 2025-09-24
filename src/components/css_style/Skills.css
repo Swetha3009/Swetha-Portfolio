@@ -1,40 +1,172 @@
-.skills-section {
-    padding: 80px 0;
-    background-color: #0d0d0d; /* Matches your dark theme */
-    text-align: center;
-  }
-  
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  
-  .skill-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 20px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 0 transparent;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .skill-card:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 20px rgba(186, 85, 211, 0.7); /* Purple glow */
-  }
-  
-  .skill-icon {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-  }
-  
-  .skill-name {
-    margin-top: 10px;
-    font-size: 1rem;
-    color: #fff;
-  }
-  
+/* ===== Skills (interactive, matches your aesthetic) ===== */
+.skills-section{
+  --accent: #8ab4f8;
+  background: #0f0f0f;
+  color: #e0e0e0;
+  padding: 72px 0;
+  text-align: center;
+}
+
+.skillcats-wrap{ width: min(1100px, 92vw); margin: 0 auto; }
+
+/* give cards a 3D stage for subtle tilt */
+.skillcats-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: clamp(16px, 2.2vw, 22px);
+  align-items: start;
+  perspective: 1000px;
+  animation: fadeSlideUp .6s ease both;
+}
+
+/* Card */
+.skillcat-card{
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(138,180,248,.18);
+  border-radius: 16px;
+  box-shadow: 0 0 16px rgba(138,180,248,.12);
+  overflow: hidden;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
+  /* subtle 3D tilt */
+  transform: rotateX(var(--tiltX, 0deg)) rotateY(var(--tiltY, 0deg));
+  transition: transform .18s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.skillcat-card:hover{
+  box-shadow: 0 0 0 6px rgba(138,180,248,.10), 0 18px 48px rgba(0,0,0,.35);
+  border-color: rgba(138,180,248,.28);
+}
+
+/* Header */
+.skillcat-head{
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  color: #fff;
+  background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 28%, #101418) 0%, #0f1116 100%);
+  border-bottom: 1px solid rgba(138,180,248,.22);
+}
+
+/* Floating emoji + pop-spin on hover */
+.skillcat-head-icon{
+  width: 44px; height: 44px; border-radius: 12px;
+  display: grid; place-items: center;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 0 12px rgba(138,180,248,.15);
+  font-size: 1.1rem;
+  will-change: transform;
+
+  /* gentle float by default */
+  animation: emoji-float 5.5s ease-in-out infinite;
+}
+.skillcat-card:hover .skillcat-head-icon{
+  /* add a quick pop-spin when the card is hovered */
+  animation: emoji-float 5.5s ease-in-out infinite, emoji-popspin .55s ease both;
+}
+
+@keyframes emoji-float{
+  0%,100%{ transform: translateY(0) }
+  50%    { transform: translateY(-3px) }
+}
+@keyframes emoji-popspin{
+  0%  { transform: scale(1) rotate(0deg) }
+  35% { transform: scale(1.14) rotate(12deg) }
+  70% { transform: scale(1.05) rotate(-10deg) }
+  100%{ transform: scale(1) rotate(0deg) }
+}
+
+.skillcat-title{ margin:0; font-size:1.05rem; font-weight:800; letter-spacing:.2px; }
+.skillcat-sub{ margin:.15rem 0 0; font-size:.9rem; color:#cfd6e6; }
+
+/* List */
+.skillcat-list{
+  list-style:none; margin:0; padding: 12px;
+  display:grid; gap:10px;
+}
+
+/* Skill item: pointer-follow glow + sheen + lift */
+.skillcat-item{
+  position: relative;
+  display:grid;
+  grid-template-columns: 26px 1fr;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  color:#cfe1ff;
+  text-align:left;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+  overflow: hidden;
+}
+
+/* cursor-follow radial highlight */
+.skillcat-item::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--accent) 25%, transparent), transparent 55%);
+  opacity:0;
+  transition: opacity .15s ease;
+}
+.skillcat-item:hover::before{ opacity:.9; }
+
+/* sheen */
+.skillcat-item::after{
+  content:"";
+  position:absolute; inset:-1px;
+  background: linear-gradient(120deg, transparent 45%, rgba(255,255,255,.18), transparent 55%);
+  transform: translateX(-120%);
+  opacity:0;
+}
+.skillcat-item:hover::after{
+  opacity:1;
+  animation: sheen .9s ease;
+}
+@keyframes sheen{
+  to { transform: translateX(120%); }
+}
+
+.skillcat-item:hover{
+  transform: translateY(-2px);
+  border-color: rgba(138,180,248,.35);
+  box-shadow: 0 0 0 6px rgba(138,180,248,.10);
+  background: rgba(255,255,255,.05);
+}
+
+.skillcat-item-icon{
+  width: 22px; height: 22px; object-fit: contain;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.35));
+  transition: transform .18s ease;
+}
+.skillcat-item:hover .skillcat-item-icon{
+  transform: translateY(-2px) scale(1.05) rotate(-3deg);
+}
+.skillcat-dot{
+  width:10px; height:10px; border-radius:999px; background: var(--accent);
+  margin-left: 8px;
+}
+
+/* Fade-up animation (same style you use elsewhere) */
+[data-animate]{ opacity:0; transform:translateY(20px); }
+@keyframes fadeSlideUp { to{ opacity:1; transform:none; } }
+
+/* Responsive */
+@media (max-width: 1100px){
+  .skillcats-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 640px){
+  .skillcats-grid{ grid-template-columns: 1fr; }
+  .skillcat-head{ grid-template-columns: 44px 1fr; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .skillcat-card,
+  .skillcat-item,
+  .skillcat-head-icon{ transition: none !important; animation: none !important; transform: none !important; }
+}
